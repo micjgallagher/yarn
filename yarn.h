@@ -1,10 +1,16 @@
+#include <stdlib.h>
+#include <stddef.h>
+
 //Header for Yarn library
 struct stringStruct{
 	char *body;
-	size_t length;
-	size_t capacity;
+	int length;
+	int capacity;
 };
 
 typedef struct stringStruct string;
 
-string construct_string(size_t capacity);
+string construct_string(int capacity);
+void destroy_string(string *obj);
+void add_character(string *obj, char input);
+int expand_memory(string *obj, int amount);
