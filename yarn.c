@@ -22,7 +22,7 @@ void destroy_string (string* obj){
 void add_character(string *obj, char input){
     
     if(obj->length + 1 >= obj->capacity){
-        //Reallocate memory here
+	expand_memory(obj, obj->capacity * 2);
     }
 
     obj->body[obj->length] = input;
