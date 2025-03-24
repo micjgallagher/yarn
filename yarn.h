@@ -14,3 +14,4 @@ string construct_string(int capacity);
 void destroy_string(string *obj);
 void add_character(string *obj, char input);
 int expand_memory(string *obj, int amount);
+string create_copy(string *obj); //figure out if this needs to actually take a pointer or if we can just pass the object

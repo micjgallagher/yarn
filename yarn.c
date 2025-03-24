@@ -1,6 +1,13 @@
 #include "yarn.h"
 #include <stdlib.h>
 
+void copy_to(string *original, string *destination){
+    //Before using this method make sure that the original has enough capacity to hold the new one
+    for(int i=0; i <= original->length; i++){ //using <= to ensure that the null character is copied over
+        destination->body[i] = original->body[i];
+    }
+}
+
 string construct_string(int capacity){
     //probably should check to see if capacity is valid
     string build;
@@ -20,9 +27,10 @@ void destroy_string (string* obj){
 }
 
 void add_character(string *obj, char input){
-    
+    // Appends a single character into the specified string. Will expand memory buffer if needed.
+    // Create a more performant version that adds multiple characters at once
     if(obj->length + 1 >= obj->capacity){
-	expand_memory(obj, obj->capacity * 2);
+        expand_memory(obj, obj->capacity * 2);
     }
 
     obj->body[obj->length] = input;
@@ -39,9 +47,19 @@ int expand_memory(string *obj, int amount){
     for(int i=0; i < obj->length + 1; i++){ //we are checking one additional element past length to ensure that the null character is copied over
         buffer[i] = obj->body[i];
     }
-    free(obj->body); 
+    free(obj->body);
     obj->body = buffer;
     obj->capacity += amount;
 
     return 0;
 }
+
+string create_copy(string *obj){
+    string copy = construct_string(obj->capacity);
+    copy_to(obj, &copy);
+    copy.length = obj->length;
+    copy.capacity = obj->capacity;
+    return copy;
+}
+
+
