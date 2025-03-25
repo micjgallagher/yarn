@@ -1,5 +1,6 @@
 #include "yarn.h"
 #include <stdlib.h>
+#include <string.h>
 
 void copy_to(string *original, string *destination){
     //Before using this method make sure that the original has enough capacity to hold the new one
@@ -62,4 +63,9 @@ string create_copy(string *obj){
     return copy;
 }
 
-
+string create_copy_memcpy(string *obj){
+    string copy = construct_string(obj->capacity);
+    memcpy(copy.body, obj->body, sizeof(char) * (obj->length+1)); //we add one to length to copy over the null char
+    copy.length = obj->length;
+    return copy;
+}

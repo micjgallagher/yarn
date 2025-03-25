@@ -17,11 +17,23 @@ int main(){
         destroy_string(&copySTR);
     }
 
-    destroy_string(&test);
 
     float end_time  = (float)clock();
     float total_time = end_time - start_time;
-    printf("Total cycles elapsed %d\n", total_time);
-    printf("Start cycle time %d\n", start_time);
-    printf("End cycle time %d\n", end_time);
+    printf("Total cycles elapsed for copy: %d\n", total_time);
+
+    //Testing memcopy speeds
+    start_time = (float) clock();
+    string memcpySTR = create_copy_memcpy(&test);
+    destroy_string(&memcpySTR);
+
+    for (int i= 0; i < 10000; i++){
+        string memcpySTR = create_copy_memcpy(&test);
+        destroy_string(&memcpySTR);
+    }
+    end_time = (float) clock();
+    total_time = end_time - start_time;
+    printf("Total cycles elapsed for memcpy: %d\n", total_time);
+
+    destroy_string(&test);
 }
