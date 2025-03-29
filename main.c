@@ -39,18 +39,15 @@ void check_speed(){
 }
 
 int main(){
-    string s1 = construct_string(10);
-    string s2 = construct_string(10);
+    string s1 = construct_string(5);
 
     for (int i=0;i<5;i++){
         add_character(&s1, 'h');
-        add_character(&s2, 'h');
     }
+    char *addition = "world";
+    add_characters(&s1, addition, 5);
+    printf("%s", s1.body);
 
-    if(check_string_equality(&s1, &s2)){
-        printf("Check passed\n");
-    }else{
-        printf("check failed");
-    }
+    destroy_string(&s1);
 }
 

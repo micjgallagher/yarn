@@ -1,6 +1,8 @@
 #include "yarn.h"
 #include <stdlib.h>
-#include <string.h>
+#include <string.h> //Using this for memcpy
+#include <stdbool.h>
+
 
 void copy_to(string *original, string *destination){
     //Before using this method make sure that the original has enough capacity to hold the new one
@@ -38,6 +40,20 @@ void add_character(string *obj, char input){
     obj->length++;
     obj->body[obj->length] = '\0';
 }
+void add_characters(string *obj, char *buffer, int buffer_length){
+    //Unlike add_character, add_characters only allocates exactly how much space is needed to add the additional characters
+    if(obj->capacity < obj->length + buffer_length + 1){ //check if this is off by one
+        int free_memory = obj->capacity - obj->length - 1;
+        int needed_memory = buffer_length - free_memory;
+        expand_memory(obj, needed_memory);
+        obj->capacity = obj->capacity + needed_memory;
+    }
+    //Copy buffer over
+    char *dest = obj->body + obj->length;
+    memcpy(dest, buffer, buffer_length);
+    obj->length += buffer_length;
+    obj->body[obj->length] = '\0';
+}
 
 int expand_memory(string *obj, int amount){
     //Expands the buffer size to capacity + amount
@@ -68,4 +84,17 @@ string create_copy_memcpy(string *obj){
     memcpy(copy.body, obj->body, sizeof(char) * (obj->length+1)); //we add one to length to copy over the null char
     copy.length = obj->length;
     return copy;
+}
+
+bool check_string_equality(string* s1, string* s2){
+    if(s1->length != s2->length){
+        return false;
+    }
+
+    for(int i=0;i< s1->length;i++){
+        if(s1->body[i] != s2->body[i]){
+            return false;
+        }
+    }
+    return true;
 }
