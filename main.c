@@ -39,11 +39,14 @@ void check_speed(){
 }
 
 int main(){
-    string s1 = construct_string(5);
+    string s1 = construct_string(10);
 
     for (int i=0;i<5;i++){
         add_character(&s1, 'h');
     }
+    printf("Total capacity is %d\n", s1.capacity);
+    shrink_to_fit(&s1);
+    printf("Total capacity is %d\n", s1.capacity);
     char *addition = "world";
     add_characters(&s1, addition, 5);
     printf("%s", s1.body);

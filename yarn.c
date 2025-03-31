@@ -31,7 +31,6 @@ void destroy_string (string* obj){
 
 void add_character(string *obj, char input){
     // Appends a single character into the specified string. Will expand memory buffer if needed.
-    // Create a more performant version that adds multiple characters at once
     if(obj->length + 1 >= obj->capacity){
         expand_memory(obj, obj->capacity * 2);
     }
@@ -69,6 +68,14 @@ int expand_memory(string *obj, int amount){
     obj->capacity += amount;
 
     return 0;
+}
+void shrink_to_fit(string* obj){
+    int total_size = (obj->length + 1) * sizeof(char);
+    char *buffer = malloc(total_size);
+    memcpy(buffer, obj->body, total_size);
+    free(obj->body);
+    obj->body = buffer;
+    obj->capacity = total_size;
 }
 
 string create_copy(string *obj){
