@@ -32,7 +32,7 @@ void destroy_string (string* obj){
 void add_character(string *obj, char input){
     // Appends a single character into the specified string. Will expand memory buffer if needed.
     if(obj->length + 1 >= obj->capacity){
-        expand_memory(obj, obj->capacity * 2);
+        expand_memory(obj, obj->capacity);
     }
 
     obj->body[obj->length] = input;
