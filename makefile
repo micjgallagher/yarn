@@ -8,4 +8,3 @@ run: main
 test:
 	make clean --no-print-directory
 	make run --no-print-directory
-
