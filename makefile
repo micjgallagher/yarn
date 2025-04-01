@@ -1,5 +1,6 @@
+args = -g
 main:
-	gcc main.c yarn.c -o main
+	gcc main.c yarn.c $(args) -o main
 
 clean:
 	rm -f main 
