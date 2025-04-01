@@ -49,7 +49,8 @@ int main(){
     printf("Total capacity is %d\n", s1.capacity);
     char *addition = "world";
     add_characters(&s1, addition, 5);
-    printf("%s", s1.body);
+    insert_at(&s1, 'a', 1);
+    printf("%s\n", s1.body);
 
     destroy_string(&s1);
 }

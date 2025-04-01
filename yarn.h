@@ -14,6 +14,7 @@ typedef struct stringStruct string;
 string construct_string(int capacity);
 void destroy_string(string *obj);
 void add_character(string *obj, char input);
+void insert_at(string *obj, char letter, int pos);
 void add_characters(string *obj, char * buffer, int buffer_length);
 int expand_memory(string *obj, int amount);
 void shrink_to_fit(string* obj);

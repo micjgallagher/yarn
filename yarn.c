@@ -14,7 +14,7 @@ void copy_to(string *original, string *destination){
 string construct_string(int capacity){
     //probably should check to see if capacity is valid
     string build;
-    build.length  = 0;
+    build.length = 0;
     build.capacity = capacity;
     build.body = malloc(sizeof(char) * capacity);
     build.body[0] = '\0';
@@ -53,7 +53,18 @@ void add_characters(string *obj, char *buffer, int buffer_length){
     obj->length += buffer_length;
     obj->body[obj->length] = '\0';
 }
+void insert_at(string* obj, char letter, int pos){
+    if(obj->capacity <= obj->length){
+        expand_memory(obj, obj->capacity);
+    }
+    int chars_to_move = obj->length + 1 - pos;
 
+    for (int i = obj->length + 2; i > pos; i--){
+        obj->body[i] = obj->body[i-1];
+    }
+    obj->body[pos] = letter;
+    obj->length++;
+}
 int expand_memory(string *obj, int amount){
     //Expands the buffer size to capacity + amount
     //returns 0 on success, 1 on error
